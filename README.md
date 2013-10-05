@@ -36,4 +36,4 @@ Here is a copy of a sample of "content.txt"
 test.csv
 --------
 In test.csv, you juse need make sure you are using the conbination of
-**Name, Email, Photo, ... **to organize your client's profile
+**Name, Email, Photo, ...**to organize your client's profile
