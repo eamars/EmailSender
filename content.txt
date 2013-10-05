@@ -1,0 +1,10 @@
+type:			# html recommanded
+subject:		# your subject here
+from:			# sender's email address
+to:			# receiver's email address, as cdv file
+attachments:		# attachments, separated by comma
+server: 	 	# server address with ports, such like smtp.gmail.com:587
+username:		# username to login your email account
+password:		# your password to login your email account
+texts:
+			# texts you want to send, with {} if you want to specify the receiver's name
