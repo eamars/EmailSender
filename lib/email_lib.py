@@ -69,7 +69,7 @@ class Message(object):
         try:
             server.send_message(self.msg)
         except Exception as e:
-            print('ERROR[{}]: Send Error'.format(e))
+            raise(e)
 
     def __str__(self):
         return str(self.msg)
@@ -77,6 +77,7 @@ class Message(object):
 
 class EmailHandler(object):
     def __init__(self, SMTPserver, username, password):
+        self.string_server = SMTPserver
         self.server = smtplib.SMTP(SMTPserver)
         self.username = username
         self.password = password
@@ -87,7 +88,7 @@ class EmailHandler(object):
         self.server.starttls()
         self.server.set_debuglevel(False)
         login = False
-        print('Logging in')
+        print('Logging in: [{}]\n===================='.format(self.string_server))
         try:
             self.server.login(self.username, self.password)
             login = True
@@ -96,11 +97,13 @@ class EmailHandler(object):
         
         if login:
             for receiver in receivers:
+                print('Sending mail to [{}]'.format(receiver.msg['To']))
                 try:
-                    print('Sending mail to {}'.format(receiver.msg['To']))
                     receiver.send(self.server)
-                finally:
-                    print('Send complete')
+                    print('Send complete\n====================')
+                except Exception as e:
+                    print('Send error: {}\n===================='.format(e))
+                    
             self.server.close()
 
 class Content(object):
