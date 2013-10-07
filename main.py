@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-
+#!/usr/bin/env python
+from lib.version import _author, _version, _license
 from lib.load import get_members, get_content
 from lib.email_lib import Message, EmailHandler
 import sys
@@ -10,12 +10,13 @@ def main():
     # Get mail content
     content = get_content('content.txt')
     members = get_members(content.destination)
-    ucdragonMail = EmailHandler(content.server, content.username, content.password)
+    EmailSender = EmailHandler(content.server, content.username, content.password)
     messageList = [Message(content.subject, content.sender, member.email, member.name, content.text, content.attachments, content.type) for member in members]
-    ucdragonMail.send(messageList)
+    EmailSender.send(messageList)
 
 if __name__ == "__main__":
     if CUR_VER >= MIN_VER:
+        print('EmailSender [{}], {}\n'.format(_version, _author))
         main()
     else:
         print('Python {}.{}.{} is not supported, Use Python3 instead'.format(CUR_VER[0], CUR_VER[1], CUR_VER[2]))
