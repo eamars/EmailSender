@@ -1,5 +1,5 @@
 _author = "Ran Bao-UC"
-_version = "1.0.1-dev"
+_version = "1.0.2-dev"
 _license = """
 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007

@@ -7,6 +7,7 @@ from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import mimetypes
+from lib.bug_reporter import BugReport
 
 CONTENT_TEMPLATE = """
 type: {}
@@ -29,7 +30,7 @@ class Message(object):
         self.msg['To'] = destination
 
 
-        self.msg.attach(MIMEText(context.format(dest_name), text_type))
+        self.msg.attach(MIMEText(context.format(dest_name), text_type, 'utf-8'))
         for attachment in attachments:
             if not os.path.isfile(attachment):
                 continue
@@ -81,6 +82,7 @@ class EmailHandler(object):
         self.server = smtplib.SMTP(SMTPserver)
         self.username = username
         self.password = password
+        self.log = BugReport('EmailSender_email_lib_module', '0')
         print('Waiting to login')
 
     def send(self, receivers):
@@ -93,6 +95,7 @@ class EmailHandler(object):
             self.server.login(self.username, self.password)
             login = True
         except Exception as e:
+            self.log.submit('Error', str(e))
             print('ERROR[{}]: Bad password or username'.format(str(e)[1:4]))
         
         if login:
@@ -102,6 +105,7 @@ class EmailHandler(object):
                     receiver.send(self.server)
                     print('Send complete\n====================')
                 except Exception as e:
+                    self.log.submit('Error', str(e))
                     print('Send error: {}\n===================='.format(e))
                     
             self.server.close()
