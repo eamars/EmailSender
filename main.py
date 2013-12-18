@@ -2,7 +2,9 @@
 from lib.version import _author, _version, _license
 from lib.load import get_members, get_content
 from lib.email_lib import Message, EmailHandler
+from lib.bug_reporter import BugReport
 import sys
+
 MIN_VER = (3, 0)
 CUR_VER = sys.version_info
 
@@ -19,4 +21,6 @@ if __name__ == "__main__":
         print('EmailSender [{}], {}\n'.format(_version, _author))
         main()
     else:
+        bug = BugReport('EmailSender', _version)
+        bug.submit('Error', 'Python {}.{}.{} is not supported, Use Python3 instead'.format(CUR_VER[0], CUR_VER[1], CUR_VER[2]))
         print('Python {}.{}.{} is not supported, Use Python3 instead'.format(CUR_VER[0], CUR_VER[1], CUR_VER[2]))
