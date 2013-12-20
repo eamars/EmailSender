@@ -83,14 +83,14 @@ class EmailHandler(object):
         self.username = username
         self.password = password
         self.log = BugReport('EmailSender_email_lib_module', '0')
-        print('Waiting to login')
+        print('Waiting to login', end='')
 
     def send(self, receivers):
         self.server.ehlo()
         self.server.starttls()
         self.server.set_debuglevel(False)
         login = False
-        print('Logging in: [{}]\n===================='.format(self.string_server))
+        print(' --logging in: [{}]'.format(self.string_server))
         try:
             self.server.login(self.username, self.password)
             login = True
@@ -100,13 +100,14 @@ class EmailHandler(object):
         
         if login:
             for receiver in receivers:
-                print('Sending mail to [{}]'.format(receiver.msg['To']))
+                print('----------------------\nSending mail to [{}]'.format(receiver.msg['To']), end='')
                 try:
                     receiver.send(self.server)
-                    print('Send complete\n====================')
+                    print(' --Send complete')
                 except Exception as e:
                     self.log.submit('Error', str(e))
-                    print('Send error: {}\n===================='.format(e))
+                    print(' --Send error: {}'.format(e))
+            print('----------------------')
                     
             self.server.close()
 

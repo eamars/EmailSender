@@ -1,5 +1,5 @@
 _author = "Ran Bao-UC"
-_version = "1.1.2-dev"
+_version = "1.1.2-release"
 _help = """
 usage: main.py content.txt
 """
