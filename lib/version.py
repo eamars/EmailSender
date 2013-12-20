@@ -1,5 +1,8 @@
 _author = "Ran Bao-UC"
-_version = "1.1.0-release"
+_version = "1.1.1-release"
+_help = """
+usage: main.py content.txt
+"""
 _license = """
 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
