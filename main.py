@@ -21,7 +21,7 @@ def main():
 
 if __name__ == "__main__":
     if CUR_VER >= MIN_VER:
-        print('EmailSender [{}], {}'.format(_version, _author))
+        print('EmailSender [{}], {}\n'.format(_version, _author))
         main()
     else:
         bug = BugReport('EmailSender', _version)
