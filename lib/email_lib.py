@@ -30,7 +30,7 @@ class Message(object):
         self.msg['To'] = destination
 
 
-        self.msg.attach(MIMEText(context.format(dest_name), text_type, 'utf-8'))
+        self.msg.attach(MIMEText(context, text_type, 'utf-8'))
         for attachment in attachments:
             if not os.path.isfile(attachment):
                 continue
